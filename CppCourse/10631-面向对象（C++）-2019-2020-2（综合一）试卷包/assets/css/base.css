@@ -1,0 +1,72 @@
+body{
+	font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+}
+
+.page-header{
+	font-weight: bold;
+}
+
+#admintable{
+	font-size: 13px;
+}
+
+#admintable > thead{
+	font-weight: bold;
+	text-align: center;
+	background-color: #eee;
+}
+
+#admintable > tbody > tr > td{
+	text-align: center;
+	line-height: 1.2;
+}
+
+#search{
+	margin: 20px 0 10px 0;
+}
+
+#search > ul{
+	padding-top: 5px;
+}
+
+.nav > li > a > span{
+	margin-right: 15px;
+}
+
+.nav{
+	font-weight: bold;
+}
+
+#exam-hour > div{
+	margin-right: 8px;
+}
+
+.examnav{
+	margin-bottom: 20px;
+}
+
+.red{
+	color: red;
+	font-weight: bold;
+}
+
+.green{
+	color: green;
+	font-weight: bold;
+}
+
+.problem-content h4{
+	margin: 15px;
+}
+
+.problem-content p{
+	margin: 10px;
+}
+
+.problem-content p:nth-child(even) {
+	font-weight: bold;
+}
+
+.problem-content pre{
+	margin: 10px;
+}

@@ -1,0 +1,819 @@
+
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+  <meta charset="gb2312">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico">
+  <title>面向对象（C++）-2019-2020-2（综合一） - 试题</title>
+
+  <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+  <link href="assets/css/dashboard.css" rel="stylesheet" />
+  <link href="assets/css/base.css" rel="stylesheet" />
+</head>
+<body style="padding-top:0px;">
+
+<div class="container">
+  <div class="row">
+    <h2 class="page-header">
+      面向对象（C++）-2019-2020-2（综合一） 试卷
+    </h2>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">试题信息</div>
+      <table id="admintable" class="table table-bordered">
+        <thead>
+          <tr>
+            <td>考试编号</td>
+            <td>考卷名称</td>
+            <td>判断题</td>
+            <td>选择题</td>
+            <td>程序填空题</td>
+            <td>程序设计题</td>
+            <td>总分</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>10631</td>
+            <td>面向对象（C++）-2019-2020-2（综合一）</td>
+            <td>24</td>
+            <td>24</td>
+            <td>53</td>
+            <td>21</td>
+            <td>122</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">一、判断题</div>
+      <table id="admintable" class="table table-bordered">
+        <thead>
+          <tr>
+            <td width="15%">答案</td>
+            <td>题目</td>
+          </tr>
+        </thead>
+        <tbody>
+                  <tr>
+            <td>
+                              <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                             ( 2 分 )             </td>
+            <td>对象数组的元素可以是不同类的对象。</td>
+          </tr>
+                  <tr>
+            <td>
+                              <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                             ( 2 分 )             </td>
+            <td>z3-1. 同一个源程序文件中，全局变量与局部变量不能同名</td>
+          </tr>
+                  <tr>
+            <td>
+                              <span class="glyphicon glyphicon-ok green" aria-hidden="true"></span>
+                             ( 2 分 )             </td>
+            <td>z3-3. 静态局部变量在函数调用结束后，它的值并不消失。</td>
+          </tr>
+                  <tr>
+            <td>
+                              <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                             ( 2 分 )             </td>
+            <td>int *buffer=new int[256] 是分配256个字节。</td>
+          </tr>
+                  <tr>
+            <td>
+                              <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                             ( 2 分 )             </td>
+            <td>指针是变量，它具有的值是某个变量或对象的地址值，它还具有一个地址值，这两个地址值是相等的。</td>
+          </tr>
+                  <tr>
+            <td>
+                              <span class="glyphicon glyphicon-ok green" aria-hidden="true"></span>
+                             ( 2 分 )             </td>
+            <td>在类中，如果不作特别说明，所有成员的访问属性均为私有类型。</td>
+          </tr>
+                  <tr>
+            <td>
+                              <span class="glyphicon glyphicon-ok green" aria-hidden="true"></span>
+                             ( 2 分 )             </td>
+            <td>析构函数没有形参，没有返回值，不能重载。</td>
+          </tr>
+                  <tr>
+            <td>
+                              <span class="glyphicon glyphicon-ok green" aria-hidden="true"></span>
+                             ( 2 分 )             </td>
+            <td>int* const obj=new int(10);
+delete obj;
+obj=new int(20);
+delete obj;
+以上代码有语法错误</td>
+          </tr>
+                  <tr>
+            <td>
+                              <span class="glyphicon glyphicon-ok green" aria-hidden="true"></span>
+                             ( 2 分 )             </td>
+            <td>能访问一个类CMyClass中的private成员的可以是类CMyClass的成员函数，友元函数和友元类中的函数。</td>
+          </tr>
+                  <tr>
+            <td>
+                              <span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>
+                             ( 2 分 )             </td>
+            <td>静态成员函数拥有this指针。</td>
+          </tr>
+                  <tr>
+            <td>
+                              <span class="glyphicon glyphicon-ok green" aria-hidden="true"></span>
+                             ( 2 分 )             </td>
+            <td>.已定义类Obj，执行代码 Obj *p=new Obj[10]; delete [ ]p;后，其构造函数执行10次,析构函数执行10次。</td>
+          </tr>
+                  <tr>
+            <td>
+                              <span class="glyphicon glyphicon-ok green" aria-hidden="true"></span>
+                             ( 2 分 )             </td>
+            <td>一个类可以定义多个对象，每个对象拥有独立的属性空间，方法是共享的。</td>
+          </tr>
+                </tbody>
+      </table>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">二、选择题</div>
+      <table id="admintable" class="table table-bordered">
+        <thead>
+          <tr>
+            <td width="15%">答案</td>
+            <td>选项</td>
+            <td width="60%">题目</td>
+          </tr>
+        </thead>
+        <tbody>
+                  <tr>
+            <td>
+              <b>C</b>
+               ( 2 分 )             </td>
+            <td>
+                                                <p><b>A.</b> 由new分配的内存空间是连续的</p>
+                                                                <p><b>B.</b> 如果当前内存无足够的空间可分配，则new运算符返回NULL</p>
+                                                                <p><b>C.</b> 由new运算符分配的内存空间，当函数执行结束时系统会自动收回</p>
+                                                                <p><b>D.</b> 对于程序中的静态数组占用的存储空间不能用delete来释放</p>
+                                                                                                      </td>
+            <td style="white-space: pre;text-align: left;line-height: 1.5em;">下面关于new和delete运算符的叙述中，错误的说法是（）。</td>
+          </tr>
+                  <tr>
+            <td>
+              <b>D</b>
+               ( 2 分 )             </td>
+            <td>
+                                                <p><b>A.</b> f(v1, &v2);</p>
+                                                                <p><b>B.</b> f(v1,v2);</p>
+                                                                <p><b>C.</b> f(&v1,&v2);</p>
+                                                                <p><b>D.</b> f(&v1,v2);</p>
+                                                                                                      </td>
+            <td style="white-space: pre;text-align: left;line-height: 1.5em;">已知函数f的原型是void f(int *a, long &b);，变量v1,v2的定义是int v1; long v2;。下列调用语句中正确的是（    ）。</td>
+          </tr>
+                  <tr>
+            <td>
+              <b>C</b>
+               ( 2 分 )             </td>
+            <td>
+                                                <p><b>A.</b> p是一个指向有3个元素的整型数组的指针</p>
+                                                                <p><b>B.</b> p是一个指向int型变量的指针</p>
+                                                                <p><b>C.</b> p是一个有3个元素的指针数组，每个元素是一个int型指针</p>
+                                                                <p><b>D.</b> p是一个数组，该数组的元素是指针p所指向的变量</p>
+                                                                                                      </td>
+            <td style="white-space: pre;text-align: left;line-height: 1.5em;">g5-6. 若有int *p[3];则以下表述中正确的是（    ）。</td>
+          </tr>
+                  <tr>
+            <td>
+              <b>D</b>
+               ( 2 分 )             </td>
+            <td>
+                                                <p><b>A.</b> 任何与类相关的函数都有this指针</p>
+                                                                <p><b>B.</b> 类的成员函数都有this指针</p>
+                                                                <p><b>C.</b> 类的友元函数都有this指针</p>
+                                                                <p><b>D.</b> 类的非静态成员函数才有this指针</p>
+                                                                                                      </td>
+            <td style="white-space: pre;text-align: left;line-height: 1.5em;">g5-19. 下列关于this指针的叙述中，正确的是（   ）。</td>
+          </tr>
+                  <tr>
+            <td>
+              <b>A</b>
+               ( 2 分 )             </td>
+            <td>
+                                                <p><b>A.</b> delete  p;</p>
+                                                                <p><b>B.</b> delete  *p;</p>
+                                                                <p><b>C.</b> delete  &p;</p>
+                                                                <p><b>D.</b> delete []p;</p>
+                                                                                                      </td>
+            <td style="white-space: pre;text-align: left;line-height: 1.5em;">假定指针变量p定义为“int* p=new int(5);”，要释放p所指向的动态内存，应使用语句(	)。</td>
+          </tr>
+                  <tr>
+            <td>
+              <b>B</b>
+               ( 2 分 )             </td>
+            <td>
+                                                <p><b>A.</b> 定义类</p>
+                                                                <p><b>B.</b> 创建类的对象</p>
+                                                                <p><b>C.</b> 指明具体类</p>
+                                                                <p><b>D.</b> 调用类的成员</p>
+                                                                                                      </td>
+            <td style="white-space: pre;text-align: left;line-height: 1.5em;">类的实例化是指（ ）。</td>
+          </tr>
+                  <tr>
+            <td>
+              <b>C</b>
+               ( 2 分 )             </td>
+            <td>
+                                                <p><b>A.</b> 指向字符的指针</p>
+                                                                <p><b>B.</b> 指向字符的常量指针</p>
+                                                                <p><b>C.</b> 指向字符串常量的指针</p>
+                                                                <p><b>D.</b> 指向字符串的常量指针</p>
+                                                                                                      </td>
+            <td style="white-space: pre;text-align: left;line-height: 1.5em;">下列说明const char *p；其中p应该是（）。</td>
+          </tr>
+                  <tr>
+            <td>
+              <b>A</b>
+               ( 2 分 )             </td>
+            <td>
+                                                <p><b>A.</b> n=0</p>
+                                                                <p><b>B.</b> n=1</p>
+                                                                <p><b>C.</b> n=2</p>
+                                                                <p><b>D.</b> n=3</p>
+                                                                                                      </td>
+            <td style="white-space: pre;text-align: left;line-height: 1.5em;">有以下程序：
+class Test
+{
+private:
+	static int n;		// 静态成员
+public:
+	Test() { n += 2; }	// 构造函数
+	~Test() { n -= 3; }	// 析构函数
+	static int GetNum() { return n; }	// 返回n
+};          
+int Test::n = 1;			// 初始化n
+int main()			// 主函数main()
+{
+	Test *p = new Test;	// 定义指针p
+	delete p;		// 释放p指向的动太对象
+	cout &lt;&lt; &quot;n=&quot; &lt;&lt; Test::GetNum() &lt;&lt; endl;// 输出n
+	return 0;                    	// 返回值0, 返回操作系统
+}
+执行后的输出结果是        。</td>
+          </tr>
+                  <tr>
+            <td>
+              <b>D</b>
+               ( 2 分 )             </td>
+            <td>
+                                                <p><b>A.</b> ABX</p>
+                                                                <p><b>B.</b> ABXB</p>
+                                                                <p><b>C.</b> ABXB</p>
+                                                                <p><b>D.</b> AXBB</p>
+                                                                                                      </td>
+            <td style="white-space: pre;text-align: left;line-height: 1.5em;">有以下程序：
+class MyClass
+{
+public:
+	MyClass() { cout &lt;&lt; &quot;A&quot;; }		// 无参构造函数
+	MyClass(char c) { cout &lt;&lt; c; }		// 带参构造函数
+	~MyClass() { cout &lt;&lt; &quot;B&quot;; }		// 析构函数
+};
+int main()					// 主函数main()
+{
+	MyClass a, *p;				// 定义变量
+	p = new MyClass('X');			// 分配动态空间
+	delete p;				// 释放动态空间
+	cout &lt;&lt; endl;				// 换行
+	
+	return 0;                    			// 返回值0, 返回操作系统
+}
+执行这个程序，屏幕上将显示输出        。</td>
+          </tr>
+                  <tr>
+            <td>
+              <b>B</b>
+               ( 2 分 )             </td>
+            <td>
+                                                <p><b>A.</b> 2</p>
+                                                                <p><b>B.</b> 4</p>
+                                                                <p><b>C.</b> 5</p>
+                                                                <p><b>D.</b> 9</p>
+                                                                                                      </td>
+            <td style="white-space: pre;text-align: left;line-height: 1.5em;">若MyClass为一个类，执行“MyClass a[4]，*p[5]；”语句时会自动调用该类构造函数的次数是</td>
+          </tr>
+                  <tr>
+            <td>
+              <b>C</b>
+               ( 2 分 )             </td>
+            <td>
+                                                <p><b>A.</b> 该函数无返回值</p>
+                                                                <p><b>B.</b> 该函数返回值是类P的对象</p>
+                                                                <p><b>C.</b> 该函数返回值是类P的对象的引用</p>
+                                                                <p><b>D.</b> 该函数返回值是类P的对象的地址</p>
+                                                                                                      </td>
+            <td style="white-space: pre;text-align: left;line-height: 1.5em;">在类P中有一个成员函数定义如下：
+P & Set(P a);
+以下关于函数返回值的叙述中，正确的说法是</td>
+          </tr>
+                  <tr>
+            <td>
+              <b>D</b>
+               ( 2 分 )             </td>
+            <td>
+                                                <p><b>A.</b> #include &lt;iostream.h&gt;</p>
+                                                                <p><b>B.</b> void display() const{cout&lt;&lt;&quot;hello&quot;&lt;&lt;endl;}</p>
+                                                                <p><b>C.</b> void display() const{base::display();}</p>
+                                                                <p><b>D.</b> dd-&gt;setName(&quot;zhangsan&quot;);</p>
+                                                                                                      </td>
+            <td style="white-space: pre;text-align: left;line-height: 1.5em;">class base
+{
+private:
+	string name;
+public:
+	void setName(string nm){name=nm;}
+	void display() const{cout&lt;&lt;&quot;hello&quot;&lt;&lt;endl;}
+};
+
+class derv:private base
+{
+private:
+	int number;
+public:
+	derv(int nm):number(nm){}
+	void display() const{base::display();}
+};
+
+void main()
+{
+	derv* dd=new derv(10);
+
+	dd-&gt;display();
+	dd-&gt;setName(&quot;zhangsan&quot;);
+
+	delete dd;
+}
+代码有错的是：</td>
+          </tr>
+                </tbody>
+      </table>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">三、程序填空题</div>
+              <div class="problem-content">
+          <p>( 3 分 ) 仔细阅读下列求两个点之间距离的程序，程序的输出结果是50，根据程序的输出结果在划线处填入正确语句。(公共C++实验5-程序填空1)
+#include&lt;iostream&gt;
+#include&lt;cmath&gt;
+using namespace std;
+class point
+{
+public:
+    point(float a,float b) { x=a; y=b; }
+    static float Distance(point &amp;p1,point&amp; p2)
+    {
+        float dx=__(1)__;
+        float dy=__(2)__;
+        return (float)sqrt(dx*dx+dy*dy);
+	}
+private:
+    float x,y;
+};
+
+int main()
+{
+    point p1(2,3),p2(32,43);
+    cout&lt;&lt;__(3)__&lt;&lt;endl;
+    return 0;
+}</p>
+
+          <table id="admintable" class="table table-bordered">
+            <thead>
+              <tr>
+                                                      <td>空格 ( 1 ) 答案 ( 1 分 )</td>
+                                                                        <td>空格 ( 2 ) 答案 ( 1 分 )</td>
+                                                                        <td>空格 ( 3 ) 答案 ( 1 分 )</td>
+                                                                                                                    </tr>
+            </thead>
+            <tbody>
+                                          <td>fabs(p1.x-p2.x)</td>
+                                                        <td>fabs(p1.y-p2.y)</td>
+                                                        <td>point.Distance(p1,p2)</td>
+                                                                                          </tbody>
+          </table>
+
+          <pre>#include&lt;iostream&gt;
+#include&lt;cmath&gt;
+using namespace std;
+class point
+{
+public:
+    point(float a,float b) { x=a; y=b; }
+    static float Distance(point &p1,point& p2)
+    {
+        float dx=__(1)__;
+        float dy=__(2)__;
+        return (float)sqrt(dx*dx+dy*dy);
+	}
+private:
+    float x,y;
+};
+
+int main()
+{
+    point p1(2,3),p2(32,43);
+    cout&lt;&lt;__(3)__&lt;&lt;endl;
+    return 0;
+}</pre>
+        </div>
+              <div class="problem-content">
+          <p>( 4 分 ) 下面程序使用对象指针访问对象的成员，请填空。
+
+#include &lt;iostream&gt;
+using namespace std;
+class  Location{
+private:
+	int  X, Y;
+public:
+	void  init(int  initX,  int  initY);
+	int  GetX();
+	int  GetY();
+};
+void  Location::init(int  initX,  int  initY){X=initX;  Y=initY;}
+int  Location::GetX(){return  X;}
+int  Location::GetY(){return  Y;}
+int main()
+{
+	Location A1;
+    __(1)__;		//定义一个指向A1的指针pA1；
+    __(2)__;		//用pA1将对象A1成员X和Y分别赋值为6和8 
+	cout&lt;&lt;__(3)__&lt;&lt;&quot; &quot;&lt;&lt;__(4)__&lt;&lt;endl;	//用pA1将对象A1成员X和Y依次输出
+	return 0;
+}</p>
+
+          <table id="admintable" class="table table-bordered">
+            <thead>
+              <tr>
+                                                      <td>空格 ( 1 ) 答案 ( 1 分 )</td>
+                                                                        <td>空格 ( 2 ) 答案 ( 1 分 )</td>
+                                                                        <td>空格 ( 3 ) 答案 ( 1 分 )</td>
+                                                                        <td>空格 ( 4 ) 答案 ( 1 分 )</td>
+                                                                                  </tr>
+            </thead>
+            <tbody>
+                                          <td>Location * pA1=&A1</td>
+                                                        <td>pA1-&gt;init(6, 8)</td>
+                                                        <td>pA1-&gt;GetX()</td>
+                                                        <td>pA1-&gt;GetY()</td>
+                                                                </tbody>
+          </table>
+
+          <pre>#include &lt;iostream&gt;
+using namespace std;
+class  Location{
+private:
+	int  X, Y;
+public:
+	void  init(int  initX,  int  initY);
+	int  GetX();
+	int  GetY();
+};
+void  Location::init(int  initX,  int  initY){X=initX;  Y=initY;}
+int  Location::GetX(){return  X;}
+int  Location::GetY(){return  Y;}
+int main()
+{
+	Location A1;
+    __(1)__;		//定义一个指向A1的指针pA1；
+    __(2)__;		//用pA1将对象A1成员X和Y分别赋值为6和8 
+	cout&lt;&lt;__(3)__&lt;&lt;" "&lt;&lt;__(4)__&lt;&lt;endl;	//用pA1将对象A1成员X和Y依次输出
+	return 0;
+}</pre>
+        </div>
+              <div class="problem-content">
+          <p>( 6 分 ) 完成下列类的定义。
+class A
+{
+    int a;
+public:
+    A()  {  a=0;  }
+     __(1)__ int Geta(  __(2)__   &amp;m);
+};
+int Geta( __(3)__  &amp;m)
+{
+return m.a;
+}</p>
+
+          <table id="admintable" class="table table-bordered">
+            <thead>
+              <tr>
+                                                      <td>空格 ( 1 ) 答案 ( 2 分 )</td>
+                                                                        <td>空格 ( 2 ) 答案 ( 2 分 )</td>
+                                                                        <td>空格 ( 3 ) 答案 ( 2 分 )</td>
+                                                                                                                    </tr>
+            </thead>
+            <tbody>
+                                          <td>friend</td>
+                                                        <td>A </td>
+                                                        <td>A </td>
+                                                                                          </tbody>
+          </table>
+
+          <pre>class A
+{
+    int a;
+public:
+    A()  {  a=0;  }
+     __(1)__ int Geta(  __(2)__   &m);
+};
+int Geta( __(3)__  &m)
+{
+return m.a;
+}</pre>
+        </div>
+              <div class="problem-content">
+          <p>( 10 分 ) 构造函数实现对类的数据成员初始化，拷贝构造函数是一特殊的构造函数，将类的对象构造函数的参数实现对数据成员的初始化，请完成以下程序，使得程序完整。
+#include&lt;iostream&gt;
+using namespace std ;
+class  Location 
+{ public :
+      Location ( int xx = 0, int yy = 0 )  
+         { ______(1)________; 
+           ______(2)________; }   //构造函数对数据成员初始化
+      Location ( const Location  &amp; p ) 
+       { X = p.X ;  Y = p.Y ;   cout &lt;&lt; &quot;Copy_constructor called.&quot; &lt;&lt; endl ; }
+      int GetX() { return  X ; }
+      int GetY() { return  Y ; }
+  private :  int  X ,  Y ;
+} ;
+int main()
+{ Location  A ( 1, 2 ) ;
+   Location B (  ____(3)___  ) ;	//用Location的对象A 来构造B	
+   cout &lt;&lt; &quot;B : &quot; &lt;&lt; B.GetX() &lt;&lt; &quot; , &quot; &lt;&lt; B.GetY() &lt;&lt; endl ;
+}</p>
+
+          <table id="admintable" class="table table-bordered">
+            <thead>
+              <tr>
+                                                      <td>空格 ( 1 ) 答案 ( 2 分 )</td>
+                                                                        <td>空格 ( 2 ) 答案 ( 2 分 )</td>
+                                                                        <td>空格 ( 3 ) 答案 ( 2 分 )</td>
+                                                                                                                    </tr>
+            </thead>
+            <tbody>
+                                          <td>X=xx</td>
+                                                        <td>Y=yy</td>
+                                                        <td>A</td>
+                                                                                          </tbody>
+          </table>
+
+          <pre>#include&lt;iostream&gt;
+using namespace std ;
+class  Location 
+{ public :
+      Location ( int xx = 0, int yy = 0 )  
+         { ______(1)________; 
+           ______(2)________; }   //构造函数对数据成员初始化
+      Location ( const Location  & p ) 
+       { X = p.X ;  Y = p.Y ;   cout &lt;&lt; "Copy_constructor called." &lt;&lt; endl ; }
+      int GetX() { return  X ; }
+      int GetY() { return  Y ; }
+  private :  int  X ,  Y ;
+} ;
+int main()
+{ Location  A ( 1, 2 ) ;
+   Location B (  ____(3)___  ) ;	//用Location的对象A 来构造B	
+   cout &lt;&lt; "B : " &lt;&lt; B.GetX() &lt;&lt; " , " &lt;&lt; B.GetY() &lt;&lt; endl ;
+} 
+</pre>
+        </div>
+              <div class="problem-content">
+          <p>( 10 分 ) 已知如下程序的输出结果是23，请将程序补充完整
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class MyClass
+{
+public:
+     void Print() const {cout&lt;&lt;23;}
+};
+
+int main()
+{
+MyClass *p=(1);
+(2).Print();
+}</p>
+
+          <table id="admintable" class="table table-bordered">
+            <thead>
+              <tr>
+                                                      <td>空格 ( 1 ) 答案 ( 2 分 )</td>
+                                                                        <td>空格 ( 2 ) 答案 ( 2 分 )</td>
+                                                                                                                                                      </tr>
+            </thead>
+            <tbody>
+                                          <td>new MyClass()</td>
+                                                        <td>(*p)</td>
+                                                                                                                    </tbody>
+          </table>
+
+          <pre>#include &lt;iostream&gt;
+
+using namespace std;
+
+class MyClass
+{
+public:
+     void Print() const {cout&lt;&lt;23;}
+};
+
+int main()
+{
+MyClass *p=(1);
+(2).Print();
+}</pre>
+        </div>
+              <div class="problem-content">
+          <p>( 10 分 ) 完成程序填空
+class arry
+{
+private:
+	int *ar;
+	int len;
+public:
+	arry(int ln):len(ln){ar=__(1)__;}
+	arry(const arry&amp; obj);
+	~arry(){__(2)__;}
+};
+
+arry::arry(const arry&amp; obj)
+{
+	__(3)__;
+	memcpy(this-&gt;ar,obj.ar,sizeof(int)*obj.len);
+	len=obj.len;
+}
+
+void main()
+{
+	arry obj1(10);
+	arry obj2(obj1);
+}</p>
+
+          <table id="admintable" class="table table-bordered">
+            <thead>
+              <tr>
+                                                      <td>空格 ( 1 ) 答案 ( 2 分 )</td>
+                                                                        <td>空格 ( 2 ) 答案 ( 2 分 )</td>
+                                                                        <td>空格 ( 3 ) 答案 ( 2 分 )</td>
+                                                                                                                    </tr>
+            </thead>
+            <tbody>
+                                          <td>new int[len]</td>
+                                                        <td>delete []ar</td>
+                                                        <td>ar=new int[obj.len]</td>
+                                                                                          </tbody>
+          </table>
+
+          <pre>class arry
+{
+private:
+	int *ar;
+	int len;
+public:
+	arry(int ln):len(ln){ar=__(1)__;}
+	arry(const arry& obj);
+	~arry(){__(2)__;}
+};
+
+arry::arry(const arry& obj)
+{
+	__(3)__;
+	memcpy(this-&gt;ar,obj.ar,sizeof(int)*obj.len);
+	len=obj.len;
+}
+
+void main()
+{
+	arry obj1(10);
+	arry obj2(obj1);
+}</pre>
+        </div>
+              <div class="problem-content">
+          <p>( 10 分 ) 完成类中成员函数的定义
+class A
+{
+int *a;
+public:
+A(int aa=0){a=__(1)__;}//用aa初始化a
+~A(){__(2)__}//release memory
+};</p>
+
+          <table id="admintable" class="table table-bordered">
+            <thead>
+              <tr>
+                                                      <td>空格 ( 1 ) 答案 ( 2 分 )</td>
+                                                                        <td>空格 ( 2 ) 答案 ( 2 分 )</td>
+                                                                                                                                                      </tr>
+            </thead>
+            <tbody>
+                                          <td>new int(aa)</td>
+                                                        <td>delete a</td>
+                                                                                                                    </tbody>
+          </table>
+
+          <pre>class A
+{
+int *a;
+public:
+A(int aa=0){a=__(1)__;}//用aa初始化a
+~A(){__(2)__}//release memory
+};</pre>
+        </div>
+         </div>
+
+   <div class="panel panel-primary">
+     <div class="panel-heading">四、程序设计题</div>
+            <div class="problem-content">
+         <h4>对象指针与对象数组 (10分) </h4>
+         <p>题目描述</p>
+         <p>建立一个对象数组，内放5个学生的数据（学号、成绩），用指针指向数组首元素，输出第1，3，5个学生的数据。</p>
+         <p>输入描述</p>
+         <p>每个测试包含5行，每行是一个学生的数据，每行有两个数，中间用空格隔开，前一个是整数，是学生的学号，后一个是小数，表示学生的成绩。</p>
+         <p>输出描述</p>
+         <p>输出第1、3、5个学生的数据，分3行输出，每行是一个学生的数据，成绩保留一位小数输出。</p>
+         <p>样例输入</p>
+         <pre>1304 56
+1305 78.5
+1308  89
+1306 81
+1311 65</pre>
+         <p>样例输出</p>
+         <pre>1304 56
+1308 89
+1311 65</pre>
+       </div>
+            <div class="problem-content">
+         <h4>静态成员和静态函数 (10分) </h4>
+         <p>题目描述</p>
+         <p>商店销售某一商品，商店每天颂统一的折扣。同时允许销售人员销售时灵活掌握售价，在此基础上，对一次购10件以上者，还可享受9.8折优惠。现已知当天3名售货员的销售情况为：
+售货员号(num)   售货件数(quantity)  售货单价(price)
+101                   5                        23.5
+102                   12                        24.56
+103                   100                      21.5
+请编程序，计算出当日此商品的总销售款sum，以及每件商品的平均售价。要求用静态数据成员和静态成员函数。（提示：将折扣discout、总销售款sum和商品销售总件数n声明为静态数据成员，再定义静态成员函数average(求平均售价)和display(输出结果).</p>
+         <p>输入描述</p>
+         <p>每个测试用例由多行组成，第一行是一个整数n，表示后面有几行测试数据(0&lt;n&lt;10)，以后每行表示一个售货员的编号、售货件数和售货单价，其中编号和件数是整数，单价是小数。</p>
+         <p>输出描述</p>
+         <p>每个测试结果输出一行，包含两个数，分别是总销售款和平均售价，两个数都保留两位小数。</p>
+         <p>样例输入</p>
+         <pre>3
+101                 5                     23.5
+102                 12                   24.56
+103                100                    21.5</pre>
+         <p>样例输出</p>
+         <pre>1020  22.0</pre>
+       </div>
+            <div class="problem-content">
+         <h4>设计员工类（Employee） (1分) </h4>
+         <p>题目描述</p>
+         <p>定义一个描述员工（Employee）基本情况的类，数据成员包括编号（num）、姓名（name）、性别（sex）、
+工资（wage）、人数（count）、总工资（totalWage）。其中姓名定义为长度为18的字符数组，性别定义为
+长度为3的字符数组，其它数据类型为整型，总工资和人数为静态数据成员，函数成员包括构造函数、显示
+基本函数（ShowBase）和显示静态数据函数（ShowStatic），其中构造函数由已知参数编号（nu），姓名
+（nm）、性别（sx）和工资（wg）构造对象，显示基本数据函数用于显示学生的编号、姓名、性别和工资，
+显示静态数据函数为静态成员函数，用于显示人数和总工资；要求所有数据成员为protected访问权限，所有
+成员函数为public访问权限，在主函数中定义若干个员工对象，分别显示员工基本信息，以及显示员工人数
+和总工资。</p>
+         <p>输入描述</p>
+         <p>第一行要求输入一个小于10的数字n，表示即将录入的员工数量，换行后从键盘录入每个员工的数据，依次是
+编号，姓名，性别，工资，每个员工占一行</p>
+         <p>输出描述</p>
+         <p>第一行显示“人数：”，第二行显示“总工资：”，后面分别显示每个员工的信息，每个员工之间空一行</p>
+         <p>样例输入</p>
+         <pre>2
+1008 张三 男 2500
+1009 李四 女 2600</pre>
+         <p>样例输出</p>
+         <pre>人数：2
+总工资：5100元
+个人基本信息：
+编号：1008
+姓名：张三
+性别：男
+工资：2500
+
+个人基本信息：
+编号：1009
+姓名：李四
+性别：女
+工资：2600</pre>
+       </div>
+        </div>
+  </div>
+</div>
+</body>
+</html>
