@@ -3,6 +3,8 @@
 #include <vector>
 #include <algorithm>
 #include <queue>
+#include <stack>
+#include <string>
 using namespace std;
 #define inf 0x3f3f3f3f
 
@@ -17,6 +19,20 @@ struct Edge
 {
     int start, end, value;
 };
+// 用来记录到某个点的最短路径
+struct dist
+{
+    int prePos; //最短路径中该节点的前一个节点
+    int value;  //该路径的距离
+    bool visit; //判断是否被访问
+};
+
+struct Node
+{
+    int value; //表示i-j的路径长度
+    int pre;   //表示点i到点j的 "跳板"
+};
+
 bool compare(Edge e1, Edge e2)
 {
     return e1.value < e2.value;
@@ -57,8 +73,11 @@ public:
     int GetOutDegree(char);                                    //获取出度
     void BFS();                                                //BFS遍历外部接口
     void DFS();                                                //DFS遍历外部接口
-    vector<pair<int, int>> Prim();                             //Prim实现
-    vector<pair<int, int>> Kruskal();
+    vector<pair<int, int>> Prim();                             //Prim实现最小生成树
+    vector<pair<int, int>> Kruskal();                          //kursual 实现最小生成树
+    vector<int> TopologicalSort();                             //拓扑排序
+    vector<struct dist> Dijkstra(int);                         //最短路径的Dijkstra算法实现
+    vector<vector<struct Node>> Floyd();                       //最短路径Floyd算法实现
     ~Graph()
     {
         numVertices = numEdges = 0;
@@ -307,10 +326,10 @@ int Graph::GetOutDegree(char x)
             }
             else if (style == DN || style == UDN)
             {
-                if (adjMatrix[dis][i] != inf)
+                if (adjMatrix[dis][i] != inf && adjMatrix[i][dis] != 0)
                     count++;
             }
-        return count - 1;
+        return count;
     }
 }
 int Graph::GetInDegree(char x)
@@ -333,10 +352,10 @@ int Graph::GetInDegree(char x)
             }
             else if (style == DN || style == UDN)
             {
-                if (adjMatrix[i][dis] != inf)
+                if (adjMatrix[i][dis] != inf && adjMatrix[i][dis] != 0)
                     count++;
             }
-        return count - 1;
+        return count;
     }
 }
 
@@ -435,7 +454,7 @@ bool Graph::merge(int x, int y)
     // 如果老大不一样，那就归并在一起，某个元素跟随另外一个元素作为子老大
     if (findx(x) != findx(y))
     {
-        set[x] = y;
+        set[findx(x)] = findx(y);
         return true;
     }
     return false;
@@ -444,22 +463,139 @@ bool Graph::merge(int x, int y)
 vector<pair<int, int>> Graph::Kruskal()
 {
     vector<pair<int, int>> MST;
-    set.assign(numVertces, 0);
+    set.assign(numVertices, 0);
     for (int i = 0; i < numVertices; i++)
         set[i] = i;
     sort(Edges.begin(), Edges.end(), compare);
     for (int i = 0; i < Edges.size(); i++)
     {
-        if(merge(Edges[i].start, Edges[i].end))
-            MST.push_back(make_pair(Edges[i].start,Edges[i].end));
+        if (merge(Edges[i].start, Edges[i].end))
+            MST.push_back(make_pair(Edges[i].start, Edges[i].end));
     }
     return MST;
 }
-// int main()
-// {
-//     Graph G1(DG, 2);
-//     G1.addGEdge('a', 'b');
-//     G1.Show();
-//     G1.addNode('a');
-//     G1.Show();
-// }
+
+vector<int> Graph::TopologicalSort()
+{
+    vector<int> Degree;
+    // 获取所有点的入度
+    for (int i = 0; i < numVertices; i++)
+        Degree.push_back(GetInDegree(vertices[i]));
+    vector<vector<int>> temp = adjMatrix;
+    stack<int> s;
+    vector<int> vec;
+    // 首先遍历全部节点查找入度为0的节点下标
+    for (int i = 0; i < numVertices; i++)
+        if (!Degree[i])
+            s.push(i);
+
+    int count = 0; // 用来计数的输出的顶点
+    while (!s.empty())
+    {
+        int index = s.top();
+        s.pop();
+        vec.push_back(index);
+        // 将该点去除 并遍历修改后的数组 压入入度为0的节点下标
+
+        for (int i = 0; i < numVertices; i++)
+        {
+            if (adjMatrix[index][i] == 1)
+            {
+                adjMatrix[index][i] = 0;
+                Degree[i]--;
+                if (!Degree[i])
+                    s.push(i);
+            }
+        }
+        count++;
+    }
+    if (count == numVertices)
+        cout << "There is no loop." << endl;
+    else
+        cout << "There is loop(s)" << endl;
+    return vec;
+}
+
+vector<struct dist> Graph::Dijkstra(int begin)
+{
+    vector<struct dist> dis;
+    // 初始化该点到到所有的点的距离
+    for (int i = 0; i < numVertices; i++)
+    {
+        struct dist temp;
+        temp.value = adjMatrix[begin][i];
+        // 如果路径的长度是无限大则将该点的前向设成-1，否则将他的前向变成起点
+        if (temp.value != inf)
+            temp.prePos = begin;
+        else
+            temp.prePos = -1;
+        temp.visit = false;
+        dis.push_back(temp);
+    }
+    // 将初始点的访问状态设为真，表示起点到起点的距离为0
+    dis[begin].visit = true;
+    int count = 1;
+    while (1)
+    {
+        // temp 用来存储当前dis数组中最小的下标
+        int temp = -1;
+        // min 表示当前dis数组中最小的值
+        int min = inf;
+        // 寻找当前dis数组的最小值
+        for (int i = 0; i < numVertices; i++)
+        {
+            if (!dis[i].visit && dis[i].value < min)
+            {
+                min = dis[i].value;
+                temp = i;
+            }
+        }
+        // 如果找不到没有访问过的点，则退出循环
+        if (temp == -1)
+            break;
+        // 将该节点的访问状态设为True
+        dis[temp].visit = true;
+        for (int i = 0; i < numVertices; i++)
+        {
+            // 对剩余出度点的遍历
+            if (!dis[i].visit && adjMatrix[temp][i] != inf)
+                // 如果存在一个点：目前存储的距离中，起点到temp，temp到i点的值(begin-...-temp-i)比begin-...-i的距离短，
+                // 则将存储距离的数组中的值更新成较短的值，将i点的前向更新为temp
+                if (dis[temp].value + adjMatrix[temp][i] < dis[i].value)
+                {
+                    dis[i].value = dis[temp].value + adjMatrix[temp][i];
+                    dis[i].prePos = temp;
+                }
+        }
+    }
+    return dis;
+}
+
+vector<vector<struct Node>> Graph::Floyd()
+{
+    vector<vector<struct Node>> Dis;
+    // 将图的邻接矩阵赋值给现在的矩阵
+    for (int i = 0; i < numVertices; i++)
+    {
+        vector<struct Node> LsitTemp;
+        for (int j = 0; j < numVertices; j++)
+        {
+            struct Node NodeTemp;
+            NodeTemp.pre = i;
+            NodeTemp.value = adjMatrix[i][j];
+            LsitTemp.push_back(NodeTemp);
+        }
+        Dis.push_back(LsitTemp);
+    }
+    // k表示中间跳板节点 如果通过跳板的节点的路径比直接到达的路径长度短，就更新两者之间的距离
+    // 并且把跳板的节点记录到pre中
+    for (int k = 0; k < numVertices; k++)
+        for (int i = 0; i < numVertices; i++)
+            for (int j = 0; j < numVertices; j++)
+                if (Dis[i][k].value != inf && Dis[k][j].value != inf && Dis[i][k].value + Dis[k][j].value < Dis[i][j].value)
+                {
+                    Dis[i][j].value = Dis[i][k].value + Dis[k][j].value;
+                    Dis[i][j].pre = k;
+                }
+    return Dis;
+}

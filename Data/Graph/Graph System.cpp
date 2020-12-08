@@ -499,10 +499,13 @@ void MinSpanningTree(Graph &G) //最小生成树
     G.addNEdge('D', 'F', 25);
     G.addNEdge('E', 'F', 26);
     vector<pair<int, int>> MST = G.Prim();
+    cout << "The current Graph is:" << endl;
+    G.Show();
     int sum = 0;
+
     for (int i = 0; i < MST.size(); i++) //按照放入MST的顺序依次输出
     {
-        cout << G.GetNode(MST[i].first) << "->" << G.GetNode(MST[i].second)<<" value: " << G.GetEdgeValue(MST[i].first, MST[i].second) << endl;
+        cout << G.GetNode(MST[i].first) << "->" << G.GetNode(MST[i].second) << " value: " << G.GetEdgeValue(MST[i].first, MST[i].second) << endl;
         sum += G.GetEdgeValue(MST[i].first, MST[i].second);
     }
     cout << "the total value is " << sum << endl;
@@ -510,20 +513,153 @@ void MinSpanningTree(Graph &G) //最小生成树
     sum = 0;
     for (int i = 0; i < MST2.size(); i++) //按照放入MST的顺序依次输出
     {
-        cout << G.GetNode(MST2[i].first) << "->" << G.GetNode(MST2[i].second)<<" value: " << G.GetEdgeValue(MST2[i].first, MST2[i].second) << endl;
+        cout << G.GetNode(MST2[i].first) << "->" << G.GetNode(MST2[i].second) << " value: " << G.GetEdgeValue(MST2[i].first, MST2[i].second) << endl;
         sum += G.GetEdgeValue(MST2[i].first, MST2[i].second);
     }
     cout << "the total value is " << sum << endl;
 }
-void TopologicalSorting(Graph &) //拓扑排序
+void TopologicalSorting(Graph &G) //拓扑排序
 {
+    G.init(DG, 7);
+    G.addGEdge('A', 'B');
+    G.addGEdge('A', 'C');
+    G.addGEdge('B', 'D');
+    G.addGEdge('B', 'E');
+    G.addGEdge('C', 'E');
+    G.addGEdge('D', 'F');
+    G.addGEdge('E', 'G');
+    G.addGEdge('F', 'G');
+    G.Show();
+    vector<int> vec;
+    vec = G.TopologicalSort();
+    cout << "The result of TopLogcal Sort is: ";
+    for (int i = 0; i < vec.size(); i++)
+        cout << G.GetNode(vec[i]) << " ";
 }
-void Dijkstra(Graph &) //最短路径(Dijkstra)
+void Dijkstra(Graph &G) //最短路径(Dijkstra)
 {
+    G.init(UDN, 6);
+    G.addNEdge('A', 'B', 34);
+    G.addNEdge('A', 'C', 46);
+    G.addNEdge('A', 'F', 19);
+    G.addNEdge('B', 'E', 12);
+    G.addNEdge('C', 'D', 17);
+    G.addNEdge('C', 'F', 25);
+    G.addNEdge('D', 'E', 38);
+    G.addNEdge('D', 'F', 25);
+    G.addNEdge('E', 'F', 26);
+    for (int k = 0; k < G.GetnumVertices(); k++)
+    {
+        vector<struct dist> dis = G.Dijkstra(k);
+        for (int i = 0; i < dis.size(); i++)
+        {
+            cout << "The distance of the shorest path of " << G.GetNode(k) << "-->" << G.GetNode(i) << " is " << dis[i].value << "\t";
+            int cur = i;
+            stack<int> path;
+            // 将每个点的前向入栈，这样会保证输出的时候保证起点->终点
+            while (dis[cur].prePos != k)
+            {
+                if (dis[cur].prePos == -1)
+                {
+                    cout << G.GetNode(k) << "-->" << G.GetNode(cur) << " No Path" << endl;
+                    break;
+                }
+                path.push(dis[cur].prePos);
+                cur = dis[cur].prePos;
+            }
+            path.push(i);
+            cout << "The shorest path is ";
+            cout << G.GetNode(k) << "-->";
+            while (path.size() > 1)
+            {
+                cout << G.GetNode(path.top()) << "-->";
+                path.pop();
+            }
+            if (path.size() > 0)
+                cout << G.GetNode(path.top()) << endl;
+            path.pop();
+        }
+        cout << endl;
+    }
 }
-void Floyd(Graph &) //最短路径(Floyd)
+void Floyd(Graph &G) //最短路径(Floyd)
 {
+    G.init(UDN, 6);
+    G.addNEdge('A', 'B', 34);
+    G.addNEdge('A', 'C', 46);
+    G.addNEdge('A', 'F', 19);
+    G.addNEdge('B', 'E', 12);
+    G.addNEdge('C', 'D', 17);
+    G.addNEdge('C', 'F', 25);
+    G.addNEdge('D', 'E', 38);
+    G.addNEdge('D', 'F', 25);
+    G.addNEdge('E', 'F', 26);
+    vector<vector<struct Node>> dis = G.Floyd();
+    int n = G.GetnumVertices();
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            stack<int> path;
+            cout << "The distance of the shorest path of " << G.GetNode(i) << "-->" << G.GetNode(j) << " is " << dis[i][j].value << "\t";
+            int cur = j;
+            cout << "The shorest path is: " << G.GetNode(i) << "-->";
+            while (dis[i][cur].pre != i)
+            {
+                cur = dis[i][cur].pre;
+                path.push(cur);
+            }
+
+            while (!path.empty())
+            {
+                cout << G.GetNode(path.top()) << "-->";
+                path.pop();
+            }
+            cout << G.GetNode(j) << endl;
+        }
+        cout << endl;
+    }
 }
-void OptimalAddress(Graph &) //最优地址
+void OptimalAddress(Graph &G) //最优地址
 {
+    G.init(UDN, 6);
+    G.addNEdge('A', 'B', 34);
+    G.addNEdge('A', 'C', 46);
+    G.addNEdge('A', 'F', 19);
+    G.addNEdge('B', 'E', 12);
+    G.addNEdge('C', 'D', 17);
+    G.addNEdge('C', 'F', 25);
+    G.addNEdge('D', 'E', 38);
+    G.addNEdge('D', 'F', 25);
+    G.addNEdge('E', 'F', 26);
+    vector<vector<struct Node>> dis = G.Floyd();
+    int n = G.GetnumVertices();
+    cout << "The Matrix of Floyd is:" << endl;
+    cout << "\t";
+    for (int i = 0; i < n; i++)
+        cout << G.GetNode(i) << "\t";
+    cout << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << G.GetNode(i) << "\t";
+        for (int j = 0; j < n; j++)
+            cout << dis[i][j].value << "\t";
+        cout << endl;
+    }
+    cout << endl;
+    int MinPlace;
+    int MinValue = inf;
+    for (int i = 0; i < n; i++)
+    {
+        int PathSum = 0;
+        for (int j = 0; j < n; j++)
+            PathSum += dis[i][j].value;
+        cout << "The shortest distance from all the points to " << G.GetNode(i) << " is " << PathSum << endl;
+        if (PathSum < MinValue)
+        {
+            MinValue = PathSum;
+            MinPlace = i;
+        }
+    }
+    cout << "The best place is " << G.GetNode(MinPlace) << endl;
 }
