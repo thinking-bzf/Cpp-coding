@@ -146,7 +146,10 @@ void HuffmanTree::Create(string str)
 void HuffmanTree::Code(Tnode *root, map<char, string> &Map, string str)
 {
     if (root->data.s != '#')
+    {
         Map[root->data.s] = str;
+        size++;
+    }
 
     else
     {

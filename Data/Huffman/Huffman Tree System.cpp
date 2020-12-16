@@ -9,6 +9,7 @@
 #include <fstream>
 #include <sstream>
 #include <bitset>
+#include <assert.h>
 #include "HuffmanTree.h"
 using namespace std;
 void input(int *x, int start, int end);
@@ -33,8 +34,8 @@ int main()
         int size;
         ShowMenu();
         cout << "\nPlease input a integer from 1 to 16 for choice:";
-        input(&choice, 1, 16);
-        if (choice == 16)
+        input(&choice, 1, 8);
+        if (choice == 8)
             break;
         switch (choice)
         {
@@ -131,41 +132,6 @@ void input(int *x, int start, int end)
         cin.sync();  //清楚之前的输入数据
     }
 }
-
-int Encode(string x)
-{
-    int value = 0;
-    stack<char> s;
-    for (int i = 0; i < x.length(); i++)
-        s.push(x[i]);
-    int power = 1;
-    while (!s.empty())
-    {
-        char str;
-        str = s.top();
-        value += (str - '0') * power;
-        power *= 2;
-        s.pop();
-    }
-    return value;
-}
-
-string Decode(long x)
-{
-    string result;
-    stack<char> s;
-    while (x)
-    {
-        s.push('0' + abs(x % 2));
-        x /= 2;
-    }
-    while (!s.empty())
-    {
-        result += s.top();
-        s.pop();
-    }
-    return result;
-}
 void InputText(HuffmanTree &HT, map<char, string> &Map, map<string, char> &Code) //从键盘输入文本
 {
     // 获取字符串
@@ -201,10 +167,16 @@ void LoadText(HuffmanTree &HT, map<char, string> &Map, map<string, char> &Code) 
     fstream in(inPath, ios_base::in | ios_base::binary);
 
     // 创建输出文件流
-    fstream outFile("Data/HuffmanOutData.txt", ios_base::out | ios_base::trunc | ios_base::binary);
-    ostringstream temp;
-    temp << in.rdbuf();
-    string str = temp.str();
+    fstream outFile("Data/Huffman/HuffmanOutData.txt", ios_base::out | ios_base::trunc | ios_base::binary);
+    string str;
+    char c;
+    while (1)
+    {
+        if (in.peek() == EOF)
+            break;
+        in.read(&c, 1);
+        str += c;
+    }
     HT.Create(str);
     // 构造哈夫曼树
     vector<pair<char, string>> vec;
@@ -215,6 +187,7 @@ void LoadText(HuffmanTree &HT, map<char, string> &Map, map<string, char> &Code) 
     for (int i = 0; i < str.length(); i++)
         result += Map[str[i]];
     //将01编码串组成一个字符
+
     string binary;
     for (int i = 0; i < result.length(); i++)
     {
@@ -223,11 +196,21 @@ void LoadText(HuffmanTree &HT, map<char, string> &Map, map<string, char> &Code) 
         {
             bitset<8> bit(binary);
             outFile << char(bit.to_ullong());
-            binary = "";
+            binary.erase(0, 8);
         }
     }
-    cout
-        << "The text has been encoded, the result has been saved to HuffmanOutData.txt." << endl;
+    // 剩余几位
+    if (binary.length() > 0)
+    {
+        int youxiao = binary.length();
+        for (int i = youxiao; i < 8; i++)
+            binary.append("0");
+        int n = binary.length();
+        bitset<8> bit(binary);
+        outFile << char(bit.to_ullong());
+        outFile << youxiao;
+    }
+    cout << "The text has been encoded, the result has been saved to HuffmanOutData.txt." << endl;
     in.close();
     outFile.close();
 }
@@ -245,52 +228,153 @@ void ShowHuffmanCodes(HuffmanTree &HT, map<char, string> &Map, map<string, char>
 }
 void TexttoCodes(HuffmanTree &HT, map<char, string> &Map, map<string, char> &Code) //文本编码(加密)
 {
-    // 创建输入文件流
-    string inPath;
-    // 创建输出文件流
-    fstream outFile("Data/HuffmanCompressData.txt", ios_base::out | ios_base::trunc | ios_base::binary);
-    cout << "Please input the path of original text:";
-    cin >> inPath;
-    fstream in(inPath, ios_base::in | ios_base::binary);
-    ostringstream temp;
-    temp << in.rdbuf();
-    string str = temp.str();
+    string passwordPath("Data/Huffman/HuffmanPassword.txt");
+    fstream password(passwordPath, ios_base::in | ios_base::binary);
+    string str;
+    char c;
+    while (1)
+    {
+        if (password.peek() == EOF)
+            break;
+        password.read(&c, 1);
+        str += c;
+    }
     HT.Create(str);
+    // 用密码本构造构造哈夫曼树
+    vector<pair<char, string>> vec;
+    vec = HT.Code(Map);
+    for (map<char, string>::iterator iter = Map.begin(); iter != Map.end(); ++iter)
+        Code[iter->second] = iter->first;
+
+    // 获取字符串
+    string strOut;
+    cout << "Please input the string to encode:\n";
+    getchar();
+    getline(cin, strOut);
+
+    // 输出编码后得文本
+    cout << "The text after encoding:" << endl;
+    for (int i = 0; i < strOut.length(); i++)
+        cout << Map[strOut[i]];
+    cout << endl;
+    // 输出哈夫曼编码
+    cout << "The Huffman code as follow:" << endl;
+    for (vector<pair<char, string>>::iterator iter = vec.begin(); iter != vec.end(); ++iter)
+        cout << iter->first << " :" << iter->second << endl;
+    
+    password.close();
 }
 void CompressFile(HuffmanTree &HT, map<char, string> &Map, map<string, char> &Code) //文件压缩(加密)
 {
+    // 创建输入文件流
+    string inPath;
+    string passwordPath("Data/Huffman/HuffmanPassword.txt");
+    // 创建输出文件流
+    fstream outFile("Data/Huffman/ZipFile.txt", ios_base::out | ios_base::trunc | ios_base::binary);
+    cout << "Please input the path of original text:";
+    cin >> inPath;
+    fstream password(passwordPath, ios_base::in | ios_base::binary);
+
+    string str;
+    char c;
+    while (1)
+    {
+        if (password.peek() == EOF)
+            break;
+        password.read(&c, 1);
+        str += c;
+    }
+    HT.Create(str);
+    // 用密码本构造构造哈夫曼树
+    vector<pair<char, string>> vec;
+    vec = HT.Code(Map);
+    for (map<char, string>::iterator iter = Map.begin(); iter != Map.end(); ++iter)
+        Code[iter->second] = iter->first;
+
+    // 将输入路径的文本加密
+    fstream fin(inPath, ios::in | ios::binary);
+    string outStr;
+    char ch;
+    while (1)
+    {
+        if (fin.peek() == EOF)
+            break;
+        fin.read(&ch, 1);
+        outStr += ch;
+    }
+    string result = "";
+    for (int i = 0; i < outStr.length(); i++)
+        result += Map[outStr[i]];
+
+    string binary;
+    for (int i = 0; i < result.length(); i++)
+    {
+        binary += result[i];
+        if (binary.length() == 8)
+        {
+            bitset<8> bit(binary);
+            outFile << char(bit.to_ullong());
+            binary.erase(0, 8);
+        }
+    }
+    // 剩余几位
+    if (binary.length() > 0)
+    {
+        int youxiao = binary.length();
+        for (int i = youxiao; i < 8; i++)
+            binary.append("0");
+        int n = binary.length();
+        bitset<8> bit(binary);
+        outFile << char(bit.to_ullong());
+        outFile << youxiao;
+    }
+    cout << "The text has been encoded, the result has beefn saved to ZipFile.txt." << endl;
+    fin.close();
+    password.close();
+    outFile.close();
 }
 void DecompressFile(HuffmanTree &HT, map<char, string> &Map, map<string, char> &Code) //解压文件(解密)
 {
     // 创建输入文件流
     string inPath;
     // 创建输出文件流
-    fstream outFile("Data/HuffmanCompressData.txt", ios_base::out | ios_base::trunc);
+    fstream outFile("Data/Huffman/UnzipFile.txt", ios_base::out | ios_base::trunc | ios_base::binary);
     cout << "Please input the path of encoded text:";
     cin >> inPath;
-    fstream in(inPath);
+    fstream fin(inPath, ios::in | ios::binary);
+    char ch;
+    char quan;
+    char youxiao;
+    fin.seekg(-1, ios_base::end);
+    // 获取最后一位数字，作为有效数字
+    fin >> youxiao;
+    string code = "";
+    ifstream::pos_type pos;
+    fin.seekg(-2, ios_base::end);
+    pos = fin.tellg();
+    fin.seekg(0, ios_base::beg);
+    // 获取压缩后的文件的二进制码 并把他变成二进制编码
+    while (1)
+    {
+        if (fin.tellg() == pos)
+            break;
+        fin.read(&ch, 1);
+        bitset<8> bit;
+        bit = ch;
+        string x = bit.to_string();
+        code += x;
+    }
+    // 最后的几个字符
+    fin >> ch;
+    bitset<8> last(ch);
+    string lastStr = last.to_string();
+    for (int i = 0; i < (youxiao - '0'); i++)
+        code = code + lastStr[i];
+
     ostringstream temp;
-    temp << in.rdbuf();
+    temp << outFile.rdbuf();
     string str = temp.str();
     cout << str << endl;
-    string code = "";
-    for (int i = 0; i < str.length(); i++)
-    {
-        bitset<64> bit(str[i]);
-        int flag = 0;
-        string bite = "";
-        int size = bit.size();
-        for (int i = bit.size() - 1; i >= 0; i--)
-        {
-
-            if (flag == 0)
-                if (bit[i] == 1)
-                    flag = 1;
-            if (flag)
-                bite += bit[i] + '0';
-        }
-        code += bite;
-    }
 
     string tmp;
     tmp = "";
@@ -303,8 +387,12 @@ void DecompressFile(HuffmanTree &HT, map<char, string> &Map, map<string, char> &
             tmp = "";
         }
     }
-    cout << "The text has been decoded to HuffmanCompressData.txt" << endl;
+    fin.close();
+    outFile.close();
+    cout << "The text has been decoded to UnzipFile.txt" << endl;
 }
 void PrintHuffmanTree(HuffmanTree &HT, map<char, string> &Map, map<string, char> &Code) //显示哈夫曼树
 {
+    cout << "The HuffmanTree is :" << endl;
+    HT.PrintTree();
 }
