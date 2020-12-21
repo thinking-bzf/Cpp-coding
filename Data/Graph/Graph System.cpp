@@ -393,7 +393,7 @@ void ShowMatrix(Graph &G) //显示存储矩阵
         if (style == DG || style == DN)
             cout << "The Degree of " << Node << " is :" << InDegree + OutDegree << "; InDegree: " << InDegree << ",OutDegree: " << OutDegree << endl;
         if (style == UDG || style == UDN)
-            cout << "The Degree of " << Node << " is :" << InDegree + OutDegree;
+            cout << "The Degree of " << Node << " is :" << InDegree + OutDegree << endl;
     }
 }
 void GraphTraverse(Graph &G) //图的遍历

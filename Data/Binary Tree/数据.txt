@@ -1,0 +1,7 @@
+前序创建ABD#EI##F##CG#H####
+
+前序遍历：ABDEIFCGH
+中序遍历：DIEFBGHCA
+后序遍历：IFEDHGCBA
+
+13：ABD#EI###F#CG##

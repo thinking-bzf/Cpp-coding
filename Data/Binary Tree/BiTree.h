@@ -117,8 +117,7 @@ void BiTree::Clear()
 }
 BiTree::~BiTree()
 {
-	if (root)
-		Distroy(root);
+	Clear();
 }
 bool BiTree::Delete(char x)
 {
@@ -574,7 +573,8 @@ bool BiTree::GetNodePath(Tnode *root, Tnode *target, vector<char> &v)
 {
 	if (root == nullptr)
 		return false;
-	v.push_back(root->data);
+	char temp = root->data;
+	v.push_back(temp);
 	// found表示是否找到目标值
 	bool found = false;
 	if (root == target)
@@ -589,7 +589,7 @@ bool BiTree::GetNodePath(Tnode *root, Tnode *target, vector<char> &v)
 		found = GetNodePath(root->left, target, v);
 	if (!found && root->right)
 		found = GetNodePath(root->right, target, v);
-	// 如果遍历完某条线路之后未发现目标值，则把最近添加的元素删除，然后再退栈，继续便利
+	// 如果遍历完某条线路之后未发现目标值，则把最近添加的元素删除，然后再退栈，继续遍历
 	v.pop_back();
 	return found;
 }

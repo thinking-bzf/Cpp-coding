@@ -8,15 +8,15 @@ void TraverseBinaryTree(BiTree &);   //树的遍历
 void CreateByPreInOrder(BiTree &);   //前中序创建二叉树
 void CreateByPostInOrder(BiTree &);  //中后序创建二叉树
 void ShowStauts(BiTree &);           //显示二叉树状态
-void GetElement(BiTree);             //查找结点
-void ShowNodePath(BiTree);           //打印节点路径
+void GetElement(BiTree &);             //查找结点
+void ShowNodePath(BiTree &);           //打印节点路径
 void DeleteNode(BiTree &);           //删除节点
 void InsertNode(BiTree &);           //插入节点
 void SwapTree(BiTree &);             //交换左右子树
 void JudgeTreeShape(BiTree &);       //判断二叉树形态
 void CreateBTbyArray(BiTree &);      //顺序串创建二叉树
 void ShowSequenceStorage(BiTree &T); //链式存储转顺序存储
-void PrintTreeShape(BiTree T);       //打印树
+void PrintTreeShape(BiTree &T);       //打印树
 int main()
 {
     int choice;
@@ -238,7 +238,7 @@ void ShowMenu()
     cout << "*                                                              *" << endl;
     cout << "*    3. Greate BT(Pre-In Order)   4. Greate BT(Post-In Order)  *" << endl;
     cout << "*                                                              *" << endl;
-    cout << "*    5. Clear Binary Tree         6. Clear Binary Tree         *" << endl;
+    cout << "*    5. Clear Binary Tree         6. Show Status               *" << endl;
     cout << "*                                                              *" << endl;
     cout << "*    7. Search Node               8. Show Node path            *" << endl;
     cout << "*                                                              *" << endl;
@@ -333,7 +333,7 @@ void ShowStauts(BiTree &T)
     for (int i = 1; i <= depth; i++)
         cout << "level " << i << ":" << LevelMap[i] << endl;
 }
-void GetElement(BiTree T)
+void GetElement(BiTree &T)
 {
     char x;
     cout << "Please input the value of node to be found:";
@@ -372,7 +372,7 @@ void GetElement(BiTree T)
         cout << "The node has no right child." << endl;
 }
 
-void ShowNodePath(BiTree T)
+void ShowNodePath(BiTree &T)
 {
     cout << "The path of all node in the Binary tree:" << endl;
     T.GetAllNodePath();
@@ -454,7 +454,7 @@ void ShowSequenceStorage(BiTree &T)
     cout << "The Array of the tree is :";
     cout << T.ConvertTreeStore() << endl;
 }
-void PrintTreeShape(BiTree T)
+void PrintTreeShape(BiTree &T)
 {
     cout << "The Binary Tree is :" << endl;
     T.PrintTree();

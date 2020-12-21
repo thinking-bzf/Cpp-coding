@@ -117,20 +117,14 @@ bool Graph::FindNode(char x)
 {
     vector<char>::iterator iter = find(vertices.begin(), vertices.end(), x);
     if (iter == vertices.end())
-    {
-        cout << "Can't find the vertice." << endl;
         return false;
-    }
     return true;
 }
 bool Graph::FindNode(char x, int &dis)
 {
     vector<char>::iterator iter = find(vertices.begin(), vertices.end(), x);
     if (iter == vertices.end())
-    {
-        cout << "Can't find the vertice." << endl;
         return false;
-    }
     else
         dis = distance(vertices.begin(), iter);
     return true;
@@ -139,7 +133,6 @@ bool Graph::addGEdge(char start, char end)
 {
     int StartIndex;
     int EndIndex;
-    FindNode(end);
     if (!FindNode(start, StartIndex))
     {
         cout << "Can't find the start vertice." << endl;
@@ -222,7 +215,7 @@ void Graph::Show()
 }
 bool Graph::addNode(char Node)
 {
-    if (FindNode(Node))
+    if (!FindNode(Node))
     {
         vertices.push_back(Node);
         for (int i = 0; i < numVertices; i++)

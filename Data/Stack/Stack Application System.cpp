@@ -18,6 +18,7 @@ void ClearStack(SqStack<int> &s);
 void PalindromeString();
 void NumberSystemConversion();
 void PalindromeNumber();
+void BracketsMatching();
 int main()
 {
     int choice;
@@ -109,6 +110,7 @@ int main()
             break;
         case 10:
             /* code */
+            BracketsMatching();
             cout << endl
                  << "Press any key to return Menu" << endl;
             getchar();
@@ -402,5 +404,58 @@ void PalindromeNumber()
                 cout << strnum << "<" << i << "> ";
         }
         cout << endl;
+        cout << "Please input a number:";
+    }
+}
+
+void BracketsMatching()
+{
+    cout << "Check wheter the bracketsin the input string are matched exactly.The brackets include (,),[,],<,>." << endl;
+    while (1)
+    {
+        SqStack<char> st(0);
+        int flag = 1;
+        cout << "Press 0 go to return to the menu. Please input a string" << endl;
+        getchar();
+        string str;
+        getline(cin, str);
+        if (str == "0")
+            break;
+        for (int i = 0; i < str.length(); i++)
+        {
+            char temp;
+            char temp2;
+            st.GetTop(temp);
+            switch (str[i])
+            {
+            case '(':
+            case '[':
+            case '{':
+                st.Push(str[i]);
+                break;
+            case ')':
+                if (!st.IsEmpty() && temp == '(')
+                    st.pop(temp2);
+                else
+                    flag = 0;
+                break;
+            case ']':
+                if (!st.IsEmpty() && temp == '[')
+                    st.pop(temp2);
+                else
+                    flag = 0;
+                break;
+            case '}':
+                if (!st.IsEmpty() && temp == '{')
+                    st.pop(temp2);
+                else
+                    flag = 0;
+                break;
+            }
+        }
+        if (flag)
+            cout << "The brackets can exactly match" << endl;
+        else
+            cout << "The brackets cannot match" << endl;
     }
 }

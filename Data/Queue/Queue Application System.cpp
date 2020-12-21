@@ -39,7 +39,7 @@ int main()
                  << "Press any key to return Menu" << endl;
             getchar();
             getchar();
-            
+
             break;
         case 2:
             if (!Queue.IsEmpty())
@@ -129,7 +129,7 @@ int main()
             /* code */
             break;
         case 9:
-            // PalindromeNumber();
+            ParternProblem();
             cout << endl
                  << "Press any key to return Menu" << endl;
             getchar();
@@ -138,6 +138,7 @@ int main()
             break;
         case 10:
             /* code */
+
             cout << endl
                  << "Press any key to return Menu" << endl;
             getchar();
@@ -323,4 +324,57 @@ void ExporttoFile(SqQueue<int> &Qu)
     }
     else
         cout << "The list is empty." << endl;
+}
+
+void ParternProblem()
+{
+    int m, n, k;
+    cout << "At the dance hall, boys (M) and girls (N) line up in a line when they enter the " << endl;
+    cout << "ballroom. At the beginning of the dance, one person from the top of the boys' team" << endl;
+    cout << "and one from the girls' team will be assigned as partners. Unpaired people will wait " << endl;
+    cout << "for the next round of dance music. Now it is required to write an algorithm to " << endl;
+    cout << "simulate the above-mentioned dance partner problem. Assuming that a total of k " << endl;
+    cout << "songs will been danced, find the matching status of boys and girls in each song." << endl;
+    cout << "input the count of boys :";
+    // 男生的数量
+    cin >> m;
+    cout << "input the count of the girls :";
+    // 输入女生的数量
+    cin >> n;
+    cout << "input the count of the songs :";
+    // 歌曲的数量
+    cin >> k;
+    SqQueue<int> boys(m);
+    SqQueue<int> girls(n);
+    for (int i = 1; i <= m; i++)
+        boys.Append(i);
+    for (int i = 1; i <= n; i++)
+        girls.Append(i);
+    int Min = min(m, n);
+    while (k--)
+    {
+        printf("The parterns of No.%d song are :\n");
+
+        for (int i = 0; i < Min; i++)
+        {
+            int curboy = boys.GetHead();
+            int curgirl = girls.GetHead();
+            boys.Remove();
+            girls.Remove();
+            cout << "<" << curboy << "," << curgirl << ">";
+            boys.Append(curboy);
+            girls.Append(curgirl);
+        }
+        cout << endl;
+    }
+}
+
+void GameProblem()
+{
+    cout << "Suppose that there are N sports in Olympic Game, and each athlete can take part in " << endl;
+    cout << "1 to 3 sports. How to arrange the competition schedule that:" << endl
+         << endl;
+    cout << "(1). Sports involving the same athlete are not scheduled to take place on the same day." << endl;
+    cout << "(2). Make the overall competition days the minimum." << endl;
+    
 }
