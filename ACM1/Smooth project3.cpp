@@ -13,6 +13,7 @@ struct P
     int x;
     int y;
 } p[102];
+// 求最小生成树
 double prime()
 {
     ans = 0;
