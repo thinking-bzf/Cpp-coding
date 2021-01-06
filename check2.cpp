@@ -1,89 +1,34 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
-int vis[15] = {0};
-struct tu
+int mp[102][102];
+int ans[102][102];
+int n, m, t;
+int dfs(int x, int y)
 {
-    int farmer;
-    int wolf;
-    int sheep;
-    int veg;
-} T[16];
-bool check(tu x)
-{
-    if ((x.farmer != x.sheep) && (x.wolf == x.sheep || x.sheep == x.veg))
-        return false;
-    else
-        return true;
-}
-void tuinit(tu T[])
-{
-    for (int i = 0; i < 2; i++)
-    {
-        for (int j = 0; j < 2; j++)
+    if (ans[x][y] >= 0)
+        return ans[x][y];
+    ans[x][y] = 0;
+    for (int i = 0; i <= mp[x][y]; i++)
+        for (int j = 0; j <= mp[x][y] - i; j++)
         {
-            for (int k = 0; k < 2; k++)
-            {
-                for (int l = 0; l < 2; l++)
-                {
-                    T[l + 2 * k + 4 * j + 8 * i].farmer = i;
-                    T[l + 2 * k + 4 * j + 8 * i].wolf = j;
-                    T[l + 2 * k + 4 * j + 8 * i].sheep = k;
-                    T[l + 2 * k + 4 * j + 8 * i].veg = l;
-                }
-            }
+            if (x + i >= 1 && x + i <= n && y + j <= m && y + j >= 1)
+                ans[x][y] = (dfs(x + i, y + j) + ans[x][y]) % 10000;
         }
-    }
-}
-void dfs(int k, tu T[])
-{
-    if (k == 15)
-    {
-        for (int i = 0; i < 16; i++)
-            vis[i] = 1;
-        cout << "1	1	1	1" << endl;
-        return;
-    }
-    if (vis[k] == 1)
-        return;
-    
-    else if (vis[k] == 0)
-    {
-        vis[k] = 1;
-        if (!check(T[k]))
-            return;
-        else
-        {
-            cout << T[k].farmer << "	" << T[k].wolf << "	" << T[k].sheep << "	" << T[k].veg << endl;
-            if ((k + 8) <= 15)
-            {
-
-                dfs(k + 8, T);
-                if (T[k].wolf == 0)
-                    dfs(k + 12, T);
-                if (T[k].sheep == 0)
-                    dfs(k + 10, T);
-                if (T[k].veg == 0)
-                    dfs(k + 9, T);
-                vis[k] = 0;
-            }
-            else
-            {
-                dfs(k - 8, T);
-                if (T[k].wolf == 1)
-                    dfs(k - 12, T);
-                if (T[k].veg == 1)
-                    dfs(k - 9, T);
-                if (T[k].sheep == 1)
-                    dfs(k - 10, T);
-                vis[k] = 0;
-            }
-        }
-    }
+    return ans[x][y];
 }
 int main()
 {
-    cout << "农夫	狼	羊	菜" << endl;
-    tuinit(T);
-    dfs(0, T);
+    scanf("%d", &t);
+    while (t--)
+    {
+        scanf("%d%d", &n, &m);
+        memset(ans, -1, sizeof(ans));
+        for (int i = 1; i <= n; i++)
+            for (int j = 1; j <= m; j++)
+                scanf("%d", &mp[i][j]);
+        ans[n][m] = 1;
+        printf("%d\n", dfs(1, 1));
+    }
     return 0;
 }
