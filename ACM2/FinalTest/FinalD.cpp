@@ -3,7 +3,6 @@
 using namespace std;
 long long sum[100005];
 int a[100005];
-
 int main()
 {
     int n, c;

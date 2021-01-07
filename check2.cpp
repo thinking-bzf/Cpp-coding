@@ -1,34 +1,36 @@
-#include <iostream>
-#include <cstring>
+#include <bits/stdc++.h>
 using namespace std;
-int mp[102][102];
-int ans[102][102];
-int n, m, t;
-int dfs(int x, int y)
+int dp[35][35][35];
+int w(int a, int b, int c)
 {
-    if (ans[x][y] >= 0)
-        return ans[x][y];
-    ans[x][y] = 0;
-    for (int i = 0; i <= mp[x][y]; i++)
-        for (int j = 0; j <= mp[x][y] - i; j++)
-        {
-            if (x + i >= 1 && x + i <= n && y + j <= m && y + j >= 1)
-                ans[x][y] = (dfs(x + i, y + j) + ans[x][y]) % 10000;
-        }
-    return ans[x][y];
+    if (dp[a][b][c])
+        return dp[a][b][c];
+    if (a <= 0 || b <= 0 || c <= 0)
+    {
+        dp[a][b][c] = 1;
+        return 1;
+    }
+    else if (a > 20 || b > 20 || c > 20)
+    {
+        dp[a][b][c] = 1;
+        return 1;
+    }
+    else if (a < b && b < c)
+    {
+        return w(a, b, c - 1) + w(a, b - 1, c - 1) - w(a, b - 1, c);
+    }
+    else
+    {
+        return w(a - 1, b, c) + w(a - 1, b - 1, c) + w(a - 1, b, c - 1) - w(a - 1, b - 1, c - 1);
+    }
 }
 int main()
 {
-    scanf("%d", &t);
-    while (t--)
+    int a, b, c;
+
+    while (cin >> a >> b >> c)
     {
-        scanf("%d%d", &n, &m);
-        memset(ans, -1, sizeof(ans));
-        for (int i = 1; i <= n; i++)
-            for (int j = 1; j <= m; j++)
-                scanf("%d", &mp[i][j]);
-        ans[n][m] = 1;
-        printf("%d\n", dfs(1, 1));
+        memset(dp, 0, sizeof(dp));
+        cout << w(a, b, c) << endl;
     }
-    return 0;
 }
